@@ -1,0 +1,38 @@
+<div *ngFor="let dealActivitiesGroup of dealInfo?.dealActivitiesGroup">
+  <ul class="timeline" *ngIf="dealActivitiesGroup?.dealActivities?.length">
+    <li class="timeline-header">
+      <h1>{{dealActivitiesGroup?.dateKey}}</h1>
+    </li>
+
+    <li class="timeline-item" *ngFor="let dealActivity of dealActivitiesGroup?.dealActivities">
+      <div class="timeline-time">
+        {{dealActivity?.time}}
+      </div>
+
+      <div class="timeline-badge" 
+          [class.avaf-digital]="dealActivity?.activityType === 'AVAF_STP'" 
+          [class.avaf-user]="dealActivity?.activityType === 'UI'"
+        [class.dealer]="dealActivity?.activityType=== 'EBO'">
+        <i class="glyphicon glyphicon-off"></i>
+      </div>
+
+      <div class="timeline-panel">
+        <div class="timeline-action" *ngIf="dealActivity?.action">
+          {{dealActivity?.action}}
+        </div>
+        <div class="timeline-body">
+          <!-- <div class="timeline-actor" *ngIf="dealActivity?.actor">
+                  {{dealActivity?.actor}}
+                </div> -->
+          <div class="timeline-result" *ngIf="dealActivity?.result">
+            <strong>Result:</strong> {{dealActivity?.result}}</div>
+          <div class="timeline-reason" *ngIf="dealActivity?.resultReason">
+            <strong>Reason:</strong> {{dealActivity?.resultReason}}</div>
+        </div>
+        <div class="timeline-info" *ngIf="dealActivity?.additionalInfo?.length">
+          {{dealActivity.additionalInfo}}
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
